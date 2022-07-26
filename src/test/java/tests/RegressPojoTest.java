@@ -12,13 +12,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import specifications.Specifications;
-
 import java.time.Clock;
 import java.util.List;
 import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 
-public class RegressTest {
+public class RegressPojoTest {
 
     @Test
     @DisplayName("Avatar contains ID of users")
@@ -31,7 +30,7 @@ public class RegressTest {
                 .when()
                 .get(Constants.getListOfUsersQuery())
                 .then().log().all()
-                .extract().body().jsonPath().getList("data", UserDataResponse.class);  //saving received data to UserData.class
+                .extract().body().jsonPath().getList("data", UserDataResponse.class);  //put received data to UserData.class
 
         // Verify that avatar parameter contains user ID
         users.forEach(x -> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString()), "Avatar doesn't contain user ID"));
@@ -84,7 +83,7 @@ public class RegressTest {
     public void testIsRegistrationIsSuccessful() {
         Specifications.installSpecification(Specifications.requestSpec(Constants.getBaseUrl()), Specifications.responseSpec200());
         //Test data
-        Integer idExpected = 4;
+        int idExpected = 4;
         String tokenExpected = "QpwL5tke4Pnpja7X4";
         String emailValid = "eve.holt@reqres.in";
         String passwordValid = "pistol";
