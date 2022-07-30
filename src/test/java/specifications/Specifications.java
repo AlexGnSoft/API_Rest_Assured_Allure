@@ -9,6 +9,9 @@ import io.restassured.specification.ResponseSpecification;
 
 public class Specifications {
 
+    /**
+     * Method is used for creating API request to BE
+     */
     public static RequestSpecification requestSpec(String baseUrl){
         return new RequestSpecBuilder()
                 .setBaseUri(baseUrl)
